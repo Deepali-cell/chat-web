@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import useConversation from "../zustand/useConversation.js";
 import axios from "axios";
 import { myContext } from "./StateProvider.jsx";
@@ -9,14 +9,18 @@ function useSendmessages() {
 
   const sendMessages = async (message) => {
     try {
-      const { data } = await axios.post(`${backend_url}/api/message/send/${selectedConversation._id}`, {message} ,  {
-        headers: {
-          Authorization: `Bearer ${usertoken}`,
-        },
-      });
+      const { data } = await axios.post(
+        `${backend_url}/api/message/send/${selectedConversation._id}`,
+        { message },
+        {
+          headers: {
+            Authorization: `Bearer ${usertoken}`,
+          },
+        }
+      );
 
       if (data.success) {
-        setMessages([...messages , data.messageContainer]);
+        setMessages([...messages, data.messageContainer]);
       } else {
         setMessages([...messages]);
       }
@@ -25,7 +29,6 @@ function useSendmessages() {
       setMessages([...messages]);
     }
   };
-
 
   return { sendMessages };
 }

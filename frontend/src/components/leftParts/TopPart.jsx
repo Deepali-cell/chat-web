@@ -7,7 +7,7 @@ import { IoMenu } from "react-icons/io5";
 function TopPart() {
   const [search, setSearch] = useState("");
   const { alluser } = useContext(myContext);
-  const { selectedConversation, setSelectedConversation } = useConversation();
+  const { setSelectedConversation } = useConversation();
 
   const handlesearchingbar = (e) => {
     e.preventDefault();

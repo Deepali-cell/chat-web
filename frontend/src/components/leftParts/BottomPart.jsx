@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { myContext } from "../../context/StateProvider";
 
 function BottomPart() {
-  const { usertoken, setusertoken } = useContext(myContext);
+  const { setusertoken } = useContext(myContext);
   const navigate = useNavigate();
+  
   const handleLoginbtn = () => {
     localStorage.removeItem("usertoken");
     setusertoken(false);
