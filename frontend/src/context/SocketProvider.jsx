@@ -11,7 +11,7 @@ const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (usertoken && user && user._id) {
-      const socket = io("http://localhost:3000", {
+      const socket = io("https://chat-web-fhjv.onrender.com", {
         query: {
           userId: user._id,
         },
