@@ -4,27 +4,34 @@ import { useState } from "react";
 
 function BootomPart() {
   const { sendMessages } = useSendmessages();
-  const [message, setmessage] = useState("");
-  const handlesendMessage = async (e) => {
+  const [message, setMessage] = useState("");
+
+  const handleSendMessage = async (e) => {
     e.preventDefault();
+    if (!message.trim()) return;
     await sendMessages(message);
-    setmessage("");
+    setMessage("");
   };
+
   return (
-    <div className="h-[10vh] ">
-      <form onClick={handlesendMessage}>
-        <label className="input rounded-none input-bordered bg-black border-white flex items-center outline-none border-none">
-          <input
-            type="text"
-            className="grow"
-            placeholder="Send your message here..."
-            value={message}
-            onChange={(e) => setmessage(e.target.value)}
-          />
-          <IoSend />
-        </label>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSendMessage}
+      className="h-[10vh] bg-gray-900 flex items-center px-4"
+    >
+      <div className="flex items-center w-full bg-gray-800 rounded-lg px-3 py-2">
+        <input
+          type="text"
+          className="flex-1 bg-transparent outline-none text-white"
+          placeholder="Send your message…"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+
+        <button type="submit">
+          <IoSend className="text-xl cursor-pointer text-white" />
+        </button>
+      </div>
+    </form>
   );
 }
 

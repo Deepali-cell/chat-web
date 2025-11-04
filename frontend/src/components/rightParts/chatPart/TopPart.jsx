@@ -6,21 +6,23 @@ import { SocketContext } from "../../../context/SocketProvider";
 function TopPart() {
   const { selectedConversation } = useConversation();
   const { onlineUsers } = useContext(SocketContext);
+
   const isOnline = onlineUsers.includes(selectedConversation?._id);
 
   return (
-    <div className="py-4 flex items-center justify-between bg-gray-800 px-4 md:px-6">
-      {selectedConversation ? (
-        <div className="flex items-center">
+    <div className="py-3 px-4 bg-gray-800 flex items-center gap-3 sticky top-0">
+      {selectedConversation && (
+        <>
           <img
             src={userIcon}
-            alt="User Icon"
-            className="h-12 w-12 rounded-full"
+            className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
           />
-          <div className="ml-4">
-            <h1 className="text-lg text-white capitalize">
+
+          <div className="flex flex-col">
+            <h1 className="text-base sm:text-lg font-semibold capitalize">
               {selectedConversation.username}
             </h1>
+
             <p
               className={`text-sm ${
                 isOnline ? "text-green-400" : "text-red-400"
@@ -29,9 +31,7 @@ function TopPart() {
               {isOnline ? "online" : "offline"}
             </p>
           </div>
-        </div>
-      ) : (
-        <h1 className="text-lg text-white">Select a conversation</h1>
+        </>
       )}
     </div>
   );

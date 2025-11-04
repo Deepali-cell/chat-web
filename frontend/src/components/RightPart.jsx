@@ -6,20 +6,21 @@ import TopPart from "./rightParts/chatPart/TopPart";
 
 function RightPart() {
   const { selectedConversation } = useConversation();
+
   return (
-    <div className="w-[70%] bg-gray-700 text-white ">
+    <div className="flex-1 h-full bg-gray-700 text-white flex flex-col">
       {selectedConversation ? (
         <>
-          {" "}
           <TopPart />
-          <MiddlePart />
+
+          <div className="flex-1 overflow-y-auto">
+            <MiddlePart />
+          </div>
+
           <BootomPart />
         </>
       ) : (
-        <>
-          {" "}
-          <NoMessagePart />
-        </>
+        <NoMessagePart />
       )}
     </div>
   );

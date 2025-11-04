@@ -4,9 +4,11 @@ import TopPart from "./leftParts/TopPart";
 
 function LeftPart() {
   return (
-    <div className="px-4 py-6 text-white w-[30%] bg-black">
+    <div className="h-full flex flex-col px-4 py-4">
       <TopPart />
-      <MiddlePart />
+      <div className="flex-1 overflow-y-auto">
+        <MiddlePart />
+      </div>
       <BottomPart />
     </div>
   );

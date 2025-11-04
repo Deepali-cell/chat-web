@@ -23,6 +23,7 @@ export const LoginPage = () => {
         email,
         password,
       });
+
       if (data.success) {
         localStorage.setItem("usertoken", data.usertoken);
         setusertoken(data.usertoken);
@@ -39,15 +40,24 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="md:px-10 mb-5 mx-20 mt-20">
+    <div className="w-full flex justify-center mt-20 px-4 sm:px-6 lg:px-0 mb-10">
       <form
         onSubmit={handlelogin}
-        className="border border-gray-300 rounded-lg px-10 py-2 mx-[22em]"
+        className="
+          w-full max-w-md 
+          border border-gray-300 rounded-lg 
+          px-6 py-6 
+          shadow-sm
+        "
       >
-        <h1 className="text-gray-500 font-medium text-2xl py-2">Login</h1>
-        <p>Please login to book an appointment</p>
+        <h1 className="text-gray-700 font-semibold text-2xl text-center mb-2">
+          Login
+        </h1>
+        <p className="text-center text-gray-500 mb-6">
+          Please login to book an appointment
+        </p>
 
-        <label className="input input-bordered flex items-center gap-2 my-4">
+        <label className="input input-bordered flex items-center gap-2 my-4 w-full">
           <input
             type="email"
             className="grow"
@@ -58,7 +68,7 @@ export const LoginPage = () => {
           />
         </label>
 
-        <label className="input input-bordered flex items-center gap-2 my-4">
+        <label className="input input-bordered flex items-center gap-2 my-4 w-full">
           <input
             type="password"
             className="grow"
@@ -69,16 +79,14 @@ export const LoginPage = () => {
           />
         </label>
 
-        <div className="flex items-center justify-center my-4">
-          <button
-            type="submit"
-            className="bg-blue-500 px-10 rounded-md w-full py-2 text-white"
-          >
-            Login Account
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-600 transition w-full py-2 rounded-md text-white font-medium mt-4"
+        >
+          Login Account
+        </button>
 
-        <p className="text-left">
+        <p className="text-center mt-4 text-gray-600">
           Create a new account?{" "}
           <a href="/registerpage" className="text-blue-500 underline">
             Click here

@@ -6,22 +6,20 @@ import { myContext } from "../../context/StateProvider";
 function BottomPart() {
   const { setusertoken } = useContext(myContext);
   const navigate = useNavigate();
-  
-  const handleLoginbtn = () => {
+
+  const handleLogout = () => {
     localStorage.removeItem("usertoken");
-    setusertoken(false);
+    setusertoken(null);
     navigate("/loginpage");
   };
 
   return (
-    <>
-      <div className="h-[10vh] py-2 w-full">
-        <RiLogoutCircleLine
-          className="text-2xl cursor-pointer"
-          onClick={handleLoginbtn}
-        />
-      </div>
-    </>
+    <div className="py-3 w-full flex items-center justify-start border-t border-gray-700">
+      <RiLogoutCircleLine
+        className="text-3xl cursor-pointer"
+        onClick={handleLogout}
+      />
+    </div>
   );
 }
 

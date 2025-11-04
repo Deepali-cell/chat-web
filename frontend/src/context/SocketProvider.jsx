@@ -6,12 +6,12 @@ export const SocketContext = createContext();
 
 const SocketProvider = ({ children }) => {
   const [socket, setsocket] = useState(null);
-  const { user, usertoken } = useContext(myContext);
+  const { user, usertoken, backend_url } = useContext(myContext);
   const [onlineUsers, setonlineUsers] = useState([]);
 
   useEffect(() => {
     if (usertoken && user && user._id) {
-      const socket = io("https://chat-web-fhjv.onrender.com", {
+      const socket = io(`${backend_url}`, {
         query: {
           userId: user._id,
         },

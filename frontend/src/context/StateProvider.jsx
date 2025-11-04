@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-
 export const myContext = createContext();
 
 const StateProvider = ({ children }) => {
@@ -14,6 +13,7 @@ const StateProvider = ({ children }) => {
   const [user, setuser] = useState([]);
 
   const getallusers = async () => {
+    if (!usertoken) return; // ✅ do not call if no token
     try {
       const { data } = await axios.get(`${backend_url}/api/user/allusers`, {
         headers: { Authorization: `Bearer ${usertoken}` },
@@ -48,13 +48,16 @@ const StateProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    getallusers();
+    if (usertoken) {
+      getallusers();
+    }
   }, [usertoken]);
 
   useEffect(() => {
-    getUser();
+    if (usertoken) {
+      getUser();
+    }
   }, [usertoken]);
-
 
   const value = {
     backend_url,

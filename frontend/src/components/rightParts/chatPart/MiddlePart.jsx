@@ -6,42 +6,31 @@ import useGetsocketmessage from "../../../context/useGetsocketmessage.js";
 function MiddlePart() {
   const { messages } = useGetmessages();
   useGetsocketmessage();
-  const lastmessageRef = useRef(null);
+  const lastMessageRef = useRef(null);
+
   useEffect(() => {
     setTimeout(() => {
-      if (lastmessageRef.current) {
-        lastmessageRef.current.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
+      lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   }, [messages]);
+
   return (
-    <>
+    <div className="px-4 py-2">
       {messages.length === 0 ? (
-        <div
-          className="scroll-container pt-2 mx-10 h-full flex justify-center items-center"
-          style={{ maxHeight: "calc(90vh - 10vh)" }}
-        >
-          <h1 className="">Say Hi to start the Conversation</h1>
+        <div className="h-full flex justify-center items-center text-center text-gray-300">
+          Say hi to start the conversation 👋
         </div>
       ) : (
-        <div
-          className="scroll-container pt-2 mx-10 h-full"
-          style={{ maxHeight: "calc(90vh - 10vh)" }}
-        >
-          {" "}
-          {messages.map((message, index) => {
-            const isLastMessage = index === messages.length - 1;
-            return (
-              <div key={index} ref={isLastMessage ? lastmessageRef : null}>
-                <Message message={message} />
-              </div>
-            );
-          })}
-        </div>
+        messages.map((msg, index) => {
+          const isLast = index === messages.length - 1;
+          return (
+            <div key={index} ref={isLast ? lastMessageRef : null}>
+              <Message message={msg} />
+            </div>
+          );
+        })
       )}
-    </>
+    </div>
   );
 }
 

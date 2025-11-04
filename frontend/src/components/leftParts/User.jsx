@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import userIcon from "../../assets/userIcon.png";
+import userIcon2 from "../../assets/user.png";
 import { myContext } from "../../context/StateProvider";
 import useConversation from "../../zustand/useConversation";
 import { SocketContext } from "../../context/SocketProvider";
-import userIcon2 from "../../assets/user.png";
 
 function User() {
   const { alluser } = useContext(myContext);
@@ -15,32 +15,26 @@ function User() {
       {alluser.map((user) => {
         const isSelected = selectedConversation?._id === user._id;
         const isOnline = onlineUsers.includes(user._id);
+
         return (
-          <>
-            <div
-              key={user._id}
-              className={`flex gap-2 items-center mb-2 py-2 px-2 rounded-md cursor-pointer ${
-                isSelected ? "bg-slate-700" : ""
-              }`}
-              onClick={() => {
-                setSelectedConversation(user);
-              }}
-            >
-              <div>
-                <img
-                  src={isOnline ? userIcon2 : userIcon}
-                  alt=""
-                  className="h-12 w-12"
-                />
-              </div>
-              <div>
-                <h1 className="text-sm">{user.username}</h1>
-                <p className="text-[0.9em] text-gray-400 font-light">
-                  {user.email}
-                </p>
-              </div>
+          <div
+            key={user._id}
+            className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer ${
+              isSelected ? "bg-gray-700" : "hover:bg-gray-800"
+            }`}
+            onClick={() => setSelectedConversation(user)}
+          >
+            <img
+              src={isOnline ? userIcon2 : userIcon}
+              alt=""
+              className="w-10 h-10 rounded-full"
+            />
+
+            <div className="overflow-hidden">
+              <h1 className="text-sm truncate">{user.username}</h1>
+              <p className="text-xs text-gray-400 truncate">{user.email}</p>
             </div>
-          </>
+          </div>
         );
       })}
     </>

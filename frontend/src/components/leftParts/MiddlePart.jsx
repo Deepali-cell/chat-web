@@ -1,19 +1,14 @@
 import User from "./User";
 
-function MiddlePart() {
+const MiddlePart = () => {
   return (
-    <>
-      <div className="w-full">
-        <h1 className="">Messages</h1>
-        <div
-          className="scroll-container pt-2"
-          style={{ maxHeight: "calc(84vh - 10vh)" }}
-        >
-          <User />
-        </div>
+    <div className="w-full h-full overflow-y-auto mt-2">
+      <h1 className="text-lg font-semibold px-1">Messages</h1>
+      <div className="pt-2 pb-4">
+        <User />
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default MiddlePart;

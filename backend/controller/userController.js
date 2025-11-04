@@ -27,12 +27,10 @@ const registerUser = async (req, res) => {
     }
 
     if (password.length < 8) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Password must be at least 8 characters long.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters long.",
+      });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -55,12 +53,10 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Both email and password are required.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Both email and password are required.",
+      });
     }
 
     if (!validator.isEmail(email)) {
@@ -92,7 +88,15 @@ const loginUser = async (req, res) => {
 };
 const allUsers = async (req, res) => {
   try {
-    const loginUserId = req.userId;
+    const userId = req.userId;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "You are not authorized. Please log in.",
+      });
+    }
+
+    const loginUserId = userId;
     const users = await userModal
       .find({ _id: { $ne: loginUserId } })
       .select("-password");
